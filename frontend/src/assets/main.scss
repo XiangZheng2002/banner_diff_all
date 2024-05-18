@@ -1,0 +1,89 @@
+$primaryColor: #eeaa1e;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-divider: #d9d9d9;
+  --c-light-grey: #8b8b8b;
+  --c-grey: #5f5f5f;
+  --c-black: #313131;
+
+  --c-primary: $primaryColor;
+
+  --font-family: "Noto Sans SC", sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
+
+  --radius: 48px;
+}
+
+.avatar {
+  width: var(--radius);
+  height: var(--radius);
+
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.p-multiselect-token {
+  background-color: #ffb899;
+  color: #fff;
+}
+
+.p-multiselect-token-label {
+  @apply text-sm;
+}
+
+.p-inputwrapper, .p-inputtext {
+  border: 1px solid rgba($primaryColor, 0.4);
+  border-radius: 12px;
+}
+
+.p-inputtext {
+  @apply px-4 py-1;
+}
+
+.p-inputnumber > .p-inputtext, .p-dropdown > .p-inputtext {
+  border: none;
+}
+
+.p-dropdown {
+  @apply px-2 py-1;
+}
+
+.checkboxWrapper > .p-checkbox {
+  border: 1px solid;
+  border-radius: 999px;
+  overflow: hidden;
+  @apply border-c-orange;
+  @apply shadow-md hover:shadow-lg;
+  transition-duration: 300ms;
+}
+
+.checkboxWrapper > .p-checkbox > .p-checkbox-box {
+  @apply w-full h-full;
+}
+
+.p-tooltip-text {
+  @apply text-sm;
+}
+
+@import "CataCard";
+@import "CustomInput";
+@import "TextBar";
+
+body {
+  font-family: "Noto Sans SC", sans-serif;
+
+  padding: 0;
+  margin: 0;
+}

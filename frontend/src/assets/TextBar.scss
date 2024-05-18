@@ -1,0 +1,16 @@
+.have-bar::before {
+  content: "";
+
+  display: inline-flex;
+  align-self: center;
+  justify-self: center;
+
+  height: 1.5em;
+  width: 0.3em;
+
+  margin-right: 1em;
+
+  border-radius: 100px;
+
+  background: linear-gradient(167deg, #ffe18c 0%, #ffc071 100%);
+}

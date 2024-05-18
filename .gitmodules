@@ -1,0 +1,6 @@
+[submodule "BannerDiff-Frontend"]
+	path = frontend
+	url = https://github.com/AlexLin625/BannerDiff-Frontend.git
+[submodule "flask_backend"]
+	path = backend
+	url = https://github.com/Yuntian12345/flask_backend.git

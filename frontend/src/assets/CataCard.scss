@@ -1,0 +1,12 @@
+.CataCard {
+  display: block;
+
+  height: 180px;
+  width: 350px;
+
+  border-radius: 8px;
+
+  margin: var(--card-margin);
+
+  transition-duration: 500ms;
+}

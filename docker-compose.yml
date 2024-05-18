@@ -1,0 +1,70 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+      - ./mysql/banner_diffusion.sql:/data/mysql/banner_diffusion.sql
+    ports:
+      - "13306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=banner_diffusion
+      - LANG=C.UTF-8
+    networks:
+      - mynet
+
+
+  redis:
+    image: redis:alpine
+    hostname: redis
+    networks:
+      - mynet
+
+  router:
+    image: nginx:1.19.0-alpine-perl
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./static:/data/static
+    networks:
+      - mynet
+
+  backend:
+    build: .
+    image: backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    command: ["python3","backend/app.py","run","-h","0.0.0.0"]
+    environment:
+      - FLASK_DEBUG=1
+    depends_on:
+      - redis
+      - mysql
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - mynet
+
+  celery:
+    build: .
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1
+    command: ["celery","-A","backend.app.celery","worker","-l","INFO","-P","eventlet"]
+
+    depends_on:
+      - redis
+      - backend
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - mynet
+
+
+networks:
+  mynet:
+    driver: bridge

@@ -1,0 +1,11 @@
+.cusInput {
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.cusInput:focus {
+  border: 2px solid $primaryColor;
+  border-radius: 8px;
+}
